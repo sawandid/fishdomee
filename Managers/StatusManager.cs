@@ -133,7 +133,7 @@ namespace dcrpt_miner
 
             var sb = new StringBuilder();
             sb.AppendLine();
-            sb.AppendLine("| OK \t\t\t\t\t\t");
+            sb.AppendLine("OK");
 
             ulong totalHashes = 0;
             
@@ -157,8 +157,7 @@ namespace dcrpt_miner
 
 
 
-            sb.AppendLine("|----------------------------------------------------");
-            sb.AppendLine();
+
             
             SafeConsole.WriteLine(ConsoleColor.White, sb.ToString());
         }
