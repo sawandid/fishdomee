@@ -32,13 +32,13 @@ namespace dcrpt_miner
         public static void PauseWorkers()
         {
             PauseEvent.Reset();
-            SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Paused, press 'r' to resume mining", DateTime.Now);
+            //SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Paused, press 'r' to resume mining", DateTime.Now);
         }
 
         public static void ResumeWorkers()
         {
             PauseEvent.Set();
-            SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Mining resumed", DateTime.Now);
+            //SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Mining resumed", DateTime.Now);
         }
 
         public Task StartAsync(CancellationToken cancellationToken) 
@@ -51,7 +51,7 @@ namespace dcrpt_miner
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            Logger.LogDebug("Stopping ConnectionManager thread");
+            Logger.LogDebug("Uwes");
             Channels.Jobs.Writer.Complete();
             Channels.Solutions.Writer.Complete();
             ThreadSource.Cancel();
@@ -71,7 +71,7 @@ namespace dcrpt_miner
                 TokenSource = new CancellationTokenSource();
 
                 if (job.Type == JobType.STOP) {
-                    Logger.LogDebug("Stop workers");
+                    Logger.LogDebug("Mandek");
                     continue;
                 }
 
@@ -83,18 +83,18 @@ namespace dcrpt_miner
                     algo = (IAlgorithm)Activator.CreateInstance(job.Algorithm);
                     algo.Initialize(LoggerFactory.CreateLogger(algo.GetType()), Channels, PauseEvent);
 
-                    SafeConsole.WriteLine(ConsoleColor.DarkGray, "Algorithm: {0}", algo.Name);
+                    //SafeConsole.WriteLine(ConsoleColor.DarkGray, "Algorithm: {0}", algo.Name);
                     StatusManager.RegisterAlgorith(algo);
                 }
 
                 if (job.Type == JobType.NEW) {
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("{0:T}: New {1} {2} (diff {3})", DateTime.Now, job.Name, job.Id.ToLowerInvariant(), job.Difficulty.ToString("0.##"));
+                    //Console.WriteLine("{0:T}: New {1} {2} (diff {3})", DateTime.Now, job.Name, job.Id.ToLowerInvariant(), job.Difficulty.ToString("0.##"));
                     Console.ResetColor();
                 }
 
                 job.CancellationToken = TokenSource.Token;
-                Logger.LogDebug("Assigning job to workers");
+                Logger.LogDebug("Iyo");
 
                 algo.ExecuteJob(job);
             }
