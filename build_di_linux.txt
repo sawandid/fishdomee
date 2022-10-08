@@ -1,0 +1,1 @@
+dotnet publish -c Release -p:PublishSingleFile=true --self-contained true --runtime ubuntu.18.04-x64 --output ../greg -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishTrimmed=True -p:TrimMode=Link
