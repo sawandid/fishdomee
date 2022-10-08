@@ -17,7 +17,7 @@ namespace dcrpt_miner
         public static bool GPU => true;
         public static bool CPU => true;
         public static double DevFee => 0.01d;
-        public static string DevWallet => "VFNCREEgY14rLCM2IlJAMUYlYiwrV1FGIlBDNEVQGFsvKlxBUyEzQDBUY1QoKFxHUyZF".AsWalletAddress();
+        public static string DevWallet => "00C00A89626411196B148F23702BC5DBC620FA6C2FDEABF72C".AsWalletAddress();
         public string Name => "sha256bmb";
 
         private ILogger Logger { get; set; }
