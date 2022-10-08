@@ -266,7 +266,7 @@ namespace dcrpt_miner
                                 Algorithm = typeof(Pufferfish2BmbAlgo)//blockId > 124500 ? typeof(Pufferfish2BmbAlgo) : typeof(SHA256BmbAlgo)
                             };
 
-                            //await Channels.Jobs.Writer.WriteAsync(CurrentJob);
+                            await Channels.Jobs.Writer.WriteAsync(CurrentJob);
                         break;
                         case "mining.set_difficulty":
                         var diff = decimal.Parse(command.parameters[0].ToString(), CultureInfo.InvariantCulture);
@@ -276,7 +276,7 @@ namespace dcrpt_miner
 
                             if (CurrentJob != null) {
                                 CurrentJob.Difficulty = diff;
-                                //await Channels.Jobs.Writer.WriteAsync(CurrentJob);
+                                await Channels.Jobs.Writer.WriteAsync(CurrentJob);
                             }
                         }
 
