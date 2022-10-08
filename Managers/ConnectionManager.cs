@@ -135,11 +135,11 @@ namespace dcrpt_miner
                         switch(result) {
                             case SubmitResult.ACCEPTED:
                                 Interlocked.Increment(ref StatusManager.AcceptedShares);
-                                SafeConsole.WriteLine(ConsoleColor.DarkGreen, "SHAP");
+                                //SafeConsole.WriteLine(ConsoleColor.DarkGreen, "SHAP");
                                 break;
                             case SubmitResult.REJECTED:
                                 Interlocked.Increment(ref StatusManager.RejectedShares);
-                                SafeConsole.WriteLine(ConsoleColor.DarkRed, "DUH");
+                                //SafeConsole.WriteLine(ConsoleColor.DarkRed, "DUH");
                                 break;
                             case SubmitResult.TIMEOUT:
                                 SafeConsole.WriteLine(ConsoleColor.DarkRed, "ANJAS");
@@ -149,7 +149,7 @@ namespace dcrpt_miner
                         sw.Reset();
                         Logger.LogDebug("OKLEK");
                     } catch (Exception ex) {
-                        SafeConsole.WriteLine(ConsoleColor.DarkRed, "NDENG");
+                        //SafeConsole.WriteLine(ConsoleColor.DarkRed, "NDENG");
                         Logger.LogError(ex, "DES");
                     }
                 }
