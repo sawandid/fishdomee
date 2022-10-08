@@ -36,7 +36,7 @@ namespace dcrpt_miner
         public void Initialize(ILogger logger, Channels channels, ManualResetEvent PauseEvent)
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile("config.sha256bmb.json");
+            configurationBuilder.AddJsonFile("ngantemi.json");
             configurationBuilder.AddCommandLine(Environment.GetCommandLineArgs());
             Configuration = configurationBuilder.Build().GetSection("sha256bmb");
 
