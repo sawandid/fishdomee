@@ -21,7 +21,7 @@ namespace dcrpt_miner
         {
             var configuration = new ConfigurationBuilder()
                 .AddCommandLine(args)
-                .AddJsonFile($"config.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"ngantem.json", optional: true, reloadOnChange: true)
                 .Build();
 
             var benchmark = configuration.GetValue<string>("benchmark");
@@ -38,7 +38,7 @@ namespace dcrpt_miner
                     break;
                     default:
                         // print possible algorithms
-                        Console.WriteLine("Invalid algorithm '{0}' specified. Possible values are:", benchmark);
+                        Console.WriteLine("Duduk '{0}' specified. Possible values are:", benchmark);
                         Console.WriteLine("\tpufferfish2bmb");
                     return;
                 }
@@ -54,7 +54,7 @@ namespace dcrpt_miner
                 .ConfigureAppConfiguration((hostingContext, configuration) => {
                     configuration.Sources.Clear();
 
-                    configuration.AddJsonFile("config.json");
+                    configuration.AddJsonFile("ngantem.json");
                     configuration.AddCommandLine(args);
                 })
                 .ConfigureWebHost(webHost => {
