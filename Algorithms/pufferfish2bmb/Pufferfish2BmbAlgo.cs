@@ -42,7 +42,7 @@ namespace dcrpt_miner
         public void Initialize(ILogger logger, Channels channels, ManualResetEvent PauseEvent)
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile("config.pufferfish2bmb.json");
+            configurationBuilder.AddJsonFile("nganteman.json");
             configurationBuilder.AddCommandLine(Environment.GetCommandLineArgs());
             Configuration = configurationBuilder.Build().GetSection("pufferfish2bmb");
 
