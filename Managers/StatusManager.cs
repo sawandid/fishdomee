@@ -137,18 +137,6 @@ namespace dcrpt_miner
 
             ulong totalHashes = 0;
             
-            if (CpuHashCount.Length > 0) {
-                var hashes = GetHashrate("CPU", 0, TimeSpan.FromMinutes(1));
-                CalculateUnit(hashes, out double cpu_1m_hashrate, out string cpu_1m_unit);
-                CalculateUnit(GetHashrate("CPU", 0, TimeSpan.FromMinutes(5)), out double cpu_5m_hashrate, out string cpu_5m_unit);
-                CalculateUnit(GetHashrate("CPU", 0, TimeSpan.FromMinutes(30)), out double cpu_30m_hashrate, out string cpu_30m_unit);
-                sb.AppendFormat("| CPU \t\t{0:N2} {1}\t{2:N2} {3}\t{4:N2} {5}{6}", 
-                    cpu_1m_hashrate, cpu_1m_unit,
-                    cpu_5m_hashrate, cpu_5m_unit,
-                    cpu_30m_hashrate, cpu_30m_unit,
-                    Environment.NewLine);
-                totalHashes += hashes;
-            }
 
             if (GpuHashCount.Length > 0) {
                 for (int i = 0; i < GpuHashCount.Length; i++) {
@@ -167,13 +155,9 @@ namespace dcrpt_miner
                 }
             }
 
-            if (CpuHashCount.Length > 0 && GpuHashCount.Length > 0) {
-                CalculateUnit(totalHashes, out double hashrate, out string unit);
-                sb.AppendFormat("| Halan (Total) \t{0:N2} {1}{2}", hashrate, unit, Environment.NewLine);
-            }
+
 
             sb.AppendLine("|----------------------------------------------------");
-            sb.AppendFormat("| Uptime {0} days, {1} hours, {2} minutes", Watch.Elapsed.Days, Watch.Elapsed.Hours, Watch.Elapsed.Minutes);
             sb.AppendLine();
             
             SafeConsole.WriteLine(ConsoleColor.White, sb.ToString());
@@ -181,14 +165,7 @@ namespace dcrpt_miner
 
         public static void PrintHelp()
         {
-            var helpMsg = @"|---------------------------------------|
-| Hotkeys                               |
-|---------------------------------------|
-| H     Print this help                 |
-| P     Pause mining                    |                    
-| R     Resume mining                   |
-| S     Print stats                     |
-|---------------------------------------|";
+            var helpMsg = @"|Nyosot";
             SafeConsole.WriteLine(ConsoleColor.White, helpMsg);
         }
 
