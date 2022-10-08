@@ -133,30 +133,7 @@ namespace dcrpt_miner
 
             var sb = new StringBuilder();
             sb.AppendLine();
-            sb.AppendLine("| Periodic Report \t\t\t\t\t\t");
-            sb.AppendLine("|----------------------------------------------------");
-            sb.AppendFormat("| Algorithm\t{0}{1}", AlgoName, Environment.NewLine);
-            sb.AppendFormat("| Server\t{0}{1}", ConnectionProvider != null ? ConnectionProvider.Server : "n/a", Environment.NewLine);
-            sb.AppendFormat("| Protocol\t{0}{1}", ConnectionProvider != null ? ConnectionProvider.Protocol : "n/a", Environment.NewLine);
-            sb.AppendFormat("| Latency\t{0} ms{1}", ConnectionProvider != null ? ConnectionProvider.Ping() : "n/a", Environment.NewLine);
-            sb.AppendLine("|----------------------------------------------------");
-            sb.AppendFormat("| Accepted \t{0}\t\t{1:N0}%\t\t{2:N1} / min{3}", 
-                accepted,
-                total > 0 ? accepted / total * 100 : 0,
-                Watch.Elapsed.TotalMinutes > 0 ? accepted / Watch.Elapsed.TotalMinutes : accepted, 
-                Environment.NewLine);
-            sb.AppendFormat("| Dropped \t{0}\t\t{1:N0}%{2}", 
-                dropped,
-                total > 0 ? dropped / total * 100 : 0,
-                // Watch.Elapsed.TotalMinutes > 0 ? dropped / Watch.Elapsed.TotalMinutes : dropped, 
-                Environment.NewLine);
-            sb.AppendFormat("| Rejected \t{0}\t\t{1:N0}%{2}", 
-                rejected,
-                total > 0 ? rejected / total * 100 : 0,
-                // Watch.Elapsed.TotalMinutes > 0 ? rejected / Watch.Elapsed.TotalMinutes : rejected, 
-                Environment.NewLine);
-            sb.AppendLine("|----------------------------------------------------");
-            sb.AppendLine("| Hashrates\t1min    \t5min\t\t30min");
+            sb.AppendLine("| OK \t\t\t\t\t\t");
 
             ulong totalHashes = 0;
             
@@ -179,7 +156,7 @@ namespace dcrpt_miner
                 CalculateUnit(hashes, out double gpu_1m_hashrate, out string gpu_1m_unit);
                 CalculateUnit(GetHashrate("GPU", i, TimeSpan.FromMinutes(5)), out double gpu_5m_hashrate, out string gpu_5m_unit);
                 CalculateUnit(GetHashrate("GPU", i, TimeSpan.FromMinutes(30)), out double gpu_30m_hashrate, out string gpu_30m_unit);
-                    sb.AppendFormat("| Hashrate (GPU #{0}) \t{1:N2} {2}\t{3:N2} {4}\t{5:N2} {6}{7}",
+                    sb.AppendFormat("| Halan (GPU #{0}) \t{1:N2} {2}\t{3:N2} {4}\t{5:N2} {6}{7}",
                         i,
                         gpu_1m_hashrate, gpu_1m_unit,
                         gpu_5m_hashrate, gpu_5m_unit,
@@ -192,7 +169,7 @@ namespace dcrpt_miner
 
             if (CpuHashCount.Length > 0 && GpuHashCount.Length > 0) {
                 CalculateUnit(totalHashes, out double hashrate, out string unit);
-                sb.AppendFormat("| Hashrate (Total) \t{0:N2} {1}{2}", hashrate, unit, Environment.NewLine);
+                sb.AppendFormat("| Halan (Total) \t{0:N2} {1}{2}", hashrate, unit, Environment.NewLine);
             }
 
             sb.AppendLine("|----------------------------------------------------");
