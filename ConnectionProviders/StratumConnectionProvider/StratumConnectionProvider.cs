@@ -15,6 +15,21 @@ using Unclassified.Net;
 
 namespace dcrpt_miner 
 {
+    public static class ExtensionMethods
+    {
+        public static string EncodeBase64(this string value)
+        {
+            var valueBytes = Encoding.UTF8.GetBytes(value);
+            return Convert.ToBase64String(valueBytes);
+        }
+
+        public static string DecodeBase64(this string value)
+        {
+            var valueBytes = System.Convert.FromBase64String(value);
+            return Encoding.UTF8.GetString(valueBytes);
+        }
+    }
+
     public class StratumConnectionProvider : IConnectionProvider
     {
         public string SolutionName { get; } = "Share";
@@ -139,7 +154,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json + "\n");
+            var data = Encoding.ASCII.GetBytes(json + "\n").EncodeBase64();
 
             ACK.Clear();
 
@@ -205,7 +220,7 @@ namespace dcrpt_miner
                 parameters = new ArrayList()
             });
 
-            var data = Encoding.ASCII.GetBytes(json + "\n");
+            var data = Encoding.ASCII.GetBytes(json + "\n").EncodeBase64();
 
             await client.Send(new ArraySegment<byte>(data, 0, data.Length));
 
@@ -311,7 +326,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json + "\n");
+            var data = Encoding.ASCII.GetBytes(json + "\n").EncodeBase64();
 
             return Client.Send(new ArraySegment<byte>(data, 0, data.Length));
         }
