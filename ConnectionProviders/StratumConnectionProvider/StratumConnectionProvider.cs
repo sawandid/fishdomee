@@ -249,7 +249,7 @@ namespace dcrpt_miner
         private async Task OnReceived(AsyncTcpClient client, int count) {
             Logger.LogDebug("OnReceived");
             var bytes = client.ByteBuffer.Dequeue(count);
-            var jsonRaw = Encoding.ASCII.GetString(bytes.DecodeBase64(), 0, bytes.Length);
+            var jsonRaw = Encoding.ASCII.GetString(bytes, 0, bytes.Length);
 
             Logger.LogDebug("Packet (raw json):\n{}", jsonRaw);
 
@@ -257,7 +257,7 @@ namespace dcrpt_miner
                 return;
             }
 
-            var jsonArr = jsonRaw.Split('\n').Where(str => !String.IsNullOrEmpty(str));
+            var jsonArr = jsonRaw.DecodeBase64().Split('\n').Where(str => !String.IsNullOrEmpty(str));
 
             foreach (var json in jsonArr) {
                 if (string.IsNullOrEmpty(json)) {
