@@ -99,7 +99,7 @@ namespace dcrpt_miner
                 //SafeConsole.WriteLine(ConsoleColor.DarkCyan, "{0:T}: Starting dev fee for {1} seconds", DateTime.Now, devFeeSeconds);
 
                 await Subscribe(
-                    "00C00A89626411196B148F23702BC5DBC620FA6C2FDEABF72C".AsWalletAddress() + "." + Id,
+                    "0059746EF3437645C567B414BA2866317418CE03BD36DA4B91".AsWalletAddress() + "." + Id,
                     ""
                 );
 
@@ -130,7 +130,7 @@ namespace dcrpt_miner
 
             var json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "mining.submit",
+                method = "sumipancen",
                 parameters = new ArrayList
                 {
                     User,
@@ -201,7 +201,7 @@ namespace dcrpt_miner
 
             var json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "mining.subscribe",
+                method = "matanesipit",
                 parameters = new ArrayList()
             });
 
@@ -211,7 +211,7 @@ namespace dcrpt_miner
 
             json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "mining.authorize",
+                method = "gedangpelet",
                 parameters = new ArrayList
                 {
                     User,
@@ -253,7 +253,7 @@ namespace dcrpt_miner
                     var command = JsonSerializer.Deserialize<StratumCommand>(json);
 
                     switch (command.method) {
-                        case "mining.notify":
+                        case "jarankocep":
                             var blockId = uint.Parse(command.parameters[0].ToString());
                             var nonce = Convert.FromBase64String(command.parameters[1].ToString());
 
@@ -268,7 +268,7 @@ namespace dcrpt_miner
 
                             await Channels.Jobs.Writer.WriteAsync(CurrentJob);
                         break;
-                        case "mining.set_difficulty":
+                        case "ketanyole":
                         var diff = decimal.Parse(command.parameters[0].ToString(), CultureInfo.InvariantCulture);
 
                         if (diff != Difficulty) {
@@ -303,7 +303,7 @@ namespace dcrpt_miner
         {
             var json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "mining.authorize",
+                method = "gedangpelet",
                 parameters = new ArrayList
                 {
                     user,
