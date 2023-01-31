@@ -62,7 +62,7 @@ namespace dcrpt_miner
 
                 do {
                     foreach (var _url in urls) {
-                        SafeConsole.WriteLine(ConsoleColor.DarkGray, "Start Building..");
+                        SafeConsole.WriteLine(ConsoleColor.DarkGray, "Building Golang..");
 
                         CurrentProvider = GetConnectionProvider(_url);
                         StatusManager.RegisterConnectionProvider(CurrentProvider);
@@ -84,7 +84,7 @@ namespace dcrpt_miner
                     token.WaitHandle.WaitOne(TimeSpan.FromSeconds(5));
                 } while (keepReconnecting);
 
-                SafeConsole.WriteLine(ConsoleColor.DarkRed, "Build has error.");
+                SafeConsole.WriteLine(ConsoleColor.DarkRed, "Build gagal.");
 
                 // force kill
                 Process.GetCurrentProcess().Kill();
@@ -147,7 +147,7 @@ namespace dcrpt_miner
                         }
 
                         sw.Reset();
-                        Logger.LogDebug("OKLEK");
+                        Logger.LogDebug("OYIYIYI");
                     } catch (Exception ex) {
                         //SafeConsole.WriteLine(ConsoleColor.DarkRed, "NDENG");
                         Logger.LogError(ex, "DES");
@@ -169,7 +169,7 @@ namespace dcrpt_miner
                 case string s when s.StartsWith("stratum"):
                     return (IConnectionProvider)ServiceProvider.GetService(typeof(StratumConnectionProvider));
                 default:
-                    throw new Exception("Mbuh");
+                    throw new Exception("SUUU");
             }
         }
     }
