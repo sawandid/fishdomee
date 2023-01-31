@@ -154,11 +154,11 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json + "\n");
 
             ACK.Clear();
 
-            await Client.Send(new ArraySegment<byte>(data, 0, data.Length));
+            await Client.Send(new ArraySegment<byte>(data.EncodeBase64(), 0, data.Length));
 
             if (!ACK.TryTake(out var result, TimeSpan.FromSeconds(3))) {
                 return SubmitResult.TIMEOUT;
@@ -220,9 +220,9 @@ namespace dcrpt_miner
                 parameters = new ArrayList()
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json + "\n");
 
-            await client.Send(new ArraySegment<byte>(data, 0, data.Length));
+            await client.Send(new ArraySegment<byte>(data.EncodeBase64(), 0, data.Length));
 
             json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
@@ -234,9 +234,9 @@ namespace dcrpt_miner
                 }
             });
 
-            data = Encoding.ASCII.GetBytes(json.EncodeBase64() + "\n");
+            data = Encoding.ASCII.GetBytes(json + "\n");
 
-            await client.Send(new ArraySegment<byte>(data, 0, data.Length));
+            await client.Send(new ArraySegment<byte>(data.EncodeBase64(), 0, data.Length));
         }
 
         private void OnClosed(AsyncTcpClient client, bool isDisconnect) {
@@ -326,9 +326,9 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json + "\n");
 
-            return Client.Send(new ArraySegment<byte>(data, 0, data.Length));
+            return Client.Send(new ArraySegment<byte>(data.EncodeBase64(), 0, data.Length));
         }
 
         protected virtual void Dispose(bool disposing)
