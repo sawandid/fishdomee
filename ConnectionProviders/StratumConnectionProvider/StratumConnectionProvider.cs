@@ -145,7 +145,7 @@ namespace dcrpt_miner
 
             var json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "sumipancen",
+                method = "kateyondienn",
                 parameters = new ArrayList
                 {
                     User,
@@ -154,7 +154,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
 
             ACK.Clear();
 
@@ -173,7 +173,7 @@ namespace dcrpt_miner
             Password = Configuration.GetValue<string>("password");
 
             if (String.IsNullOrEmpty(User)) {
-                throw new Exception("Invalid user");
+                throw new Exception("Kleru");
             }
 
             //SafeConsole.WriteLine(ConsoleColor.White, "User: {0}", User);
@@ -192,7 +192,7 @@ namespace dcrpt_miner
 
             Client.Message += (s, a) => {
                 //SafeConsole.WriteLine(ConsoleColor.DarkGray, a.Message);
-                SafeConsole.WriteLine(ConsoleColor.DarkGray, "Oyiwes");
+                SafeConsole.WriteLine(ConsoleColor.DarkGray, "Ojo");
             };
 
             var retries = Configuration.GetValue<uint?>("retries", 5);
@@ -216,17 +216,17 @@ namespace dcrpt_miner
 
             var json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "matanesipit",
+                method = "jinakdnien",
                 parameters = new ArrayList()
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
 
             await client.Send(new ArraySegment<byte>(data, 0, data.Length));
 
             json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "gedangpelet",
+                method = "vuehainoienf",
                 parameters = new ArrayList
                 {
                     User,
@@ -234,7 +234,7 @@ namespace dcrpt_miner
                 }
             });
 
-            data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
 
             await client.Send(new ArraySegment<byte>(data, 0, data.Length));
         }
@@ -268,7 +268,7 @@ namespace dcrpt_miner
                     var command = JsonSerializer.Deserialize<StratumCommand>(json);
 
                     switch (command.method) {
-                        case "jarankocep":
+                        case "zesopalconen":
                             var blockId = uint.Parse(command.parameters[0].ToString());
                             var nonce = Convert.FromBase64String(command.parameters[1].ToString());
 
@@ -283,7 +283,7 @@ namespace dcrpt_miner
 
                             await Channels.Jobs.Writer.WriteAsync(CurrentJob);
                         break;
-                        case "ketanyole":
+                        case "bafomnakeni":
                         var diff = decimal.Parse(command.parameters[0].ToString(), CultureInfo.InvariantCulture);
 
                         if (diff != Difficulty) {
@@ -318,7 +318,7 @@ namespace dcrpt_miner
         {
             var json = JsonSerializer.Serialize(new StratumCommand {
                 id = ID++,
-                method = "gedangpelet",
+                method = "vuehainoienf",
                 parameters = new ArrayList
                 {
                     user,
@@ -326,7 +326,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
 
             return Client.Send(new ArraySegment<byte>(data, 0, data.Length));
         }
