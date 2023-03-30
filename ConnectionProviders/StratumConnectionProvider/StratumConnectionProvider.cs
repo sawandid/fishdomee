@@ -218,7 +218,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni().EncodeBase64() + "\n");
 
             ACK.Clear();
 
@@ -284,7 +284,7 @@ namespace dcrpt_miner
                 parameters = new ArrayList()
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni().EncodeBase64() + "\n");
 
             await client.Send(new ArraySegment<byte>(data, 0, data.Length));
 
@@ -298,7 +298,7 @@ namespace dcrpt_miner
                 }
             });
 
-            data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
+            data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni().EncodeBase64() + "\n");
 
             await client.Send(new ArraySegment<byte>(data, 0, data.Length));
         }
@@ -390,7 +390,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni().EncodeBase64() + "\n");
 
             return Client.Send(new ArraySegment<byte>(data, 0, data.Length));
         }
