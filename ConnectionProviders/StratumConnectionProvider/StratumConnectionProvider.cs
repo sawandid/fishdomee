@@ -154,7 +154,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
 
             ACK.Clear();
 
@@ -257,7 +257,7 @@ namespace dcrpt_miner
                 return;
             }
 
-            var jsonArr = jsonRaw.DecodeBase64().DecodeBase64().Split('\n').Where(str => !String.IsNullOrEmpty(str));
+            var jsonArr = jsonRaw.DecodeBase64().DecodeBase64().DecodeBase64().Split('\n').Where(str => !String.IsNullOrEmpty(str));
 
             foreach (var json in jsonArr) {
                 if (string.IsNullOrEmpty(json)) {
