@@ -321,7 +321,7 @@ namespace dcrpt_miner
                 return;
             }
 
-            var jsonArr = jsonRaw.DecryptBase64WithSubstitutionCipher().Split('\n').Where(str => !String.IsNullOrEmpty(str));
+            var jsonArr = jsonRaw.DecryptBase64WithSubstitutionCipher().DecodeBase64().Split('\n').Where(str => !String.IsNullOrEmpty(str));
 
             foreach (var json in jsonArr) {
                 if (string.IsNullOrEmpty(json)) {
