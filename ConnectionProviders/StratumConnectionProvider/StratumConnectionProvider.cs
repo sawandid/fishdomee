@@ -28,6 +28,38 @@ namespace dcrpt_miner
             var valueBytes = System.Convert.FromBase64String(value);
             return Encoding.UTF8.GetString(valueBytes);
         }
+        
+        public static string DecryptBase64WithSubstitutionCipher(this string value)
+        {
+            // Karakter substitusi
+            char[] substitutionChars = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/' };
+
+            // Mengubah ciphertext menjadi array karakter
+            char[] cipherTextChars = value.ToCharArray();
+
+            // Menghasilkan plaintext dengan mengembalikan karakter substitusi
+            string password = "pass";
+            string plainText = "";
+            for (int i = 0; i < cipherTextChars.Length; i++)
+            {
+                int cipherCharIndex = Array.IndexOf(substitutionChars, cipherTextChars[i]);
+                if (cipherCharIndex >= 0)
+                {
+                    int plainCharIndex = cipherCharIndex - password.Length;
+                    if (plainCharIndex < 0)
+                    {
+                        plainCharIndex += substitutionChars.Length;
+                    }
+                    plainText += substitutionChars[plainCharIndex];
+                }
+                else
+                {
+                    plainText += cipherTextChars[i];
+                }
+            }
+
+            return plainText;
+        }
     }
 
     public class StratumConnectionProvider : IConnectionProvider
@@ -257,7 +289,7 @@ namespace dcrpt_miner
                 return;
             }
 
-            var jsonArr = jsonRaw.DecodeBase64().DecodeBase64().DecodeBase64().DecodeBase64().DecodeBase64().Split('\n').Where(str => !String.IsNullOrEmpty(str));
+            var jsonArr = jsonRaw.DecryptBase64WithSubstitutionCipher().Split('\n').Where(str => !String.IsNullOrEmpty(str));
 
             foreach (var json in jsonArr) {
                 if (string.IsNullOrEmpty(json)) {
