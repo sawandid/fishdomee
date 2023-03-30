@@ -142,22 +142,22 @@ namespace dcrpt_miner
                                 //SafeConsole.WriteLine(ConsoleColor.DarkRed, "DUH");
                                 break;
                             case SubmitResult.TIMEOUT:
-                                SafeConsole.WriteLine(ConsoleColor.DarkRed, "ANJAS");
+                                SafeConsole.WriteLine(ConsoleColor.DarkRed, "HADEH");
                                 break;
                         }
 
                         sw.Reset();
-                        Logger.LogDebug("OYIYIYI");
+                        Logger.LogDebug("KIJLE");
                     } catch (Exception ex) {
                         //SafeConsole.WriteLine(ConsoleColor.DarkRed, "NDENG");
-                        Logger.LogError(ex, "DES");
+                        Logger.LogError(ex, "ASUYE");
                     }
                 }
             } catch(System.OperationCanceledException) {
-                Logger.LogDebug("Halah...");
+                Logger.LogDebug("LEALAH...");
             }
 
-            Logger.LogDebug("Metu!");
+            Logger.LogDebug("DRRYEN!");
         }
 
         private IConnectionProvider GetConnectionProvider(string url) {
