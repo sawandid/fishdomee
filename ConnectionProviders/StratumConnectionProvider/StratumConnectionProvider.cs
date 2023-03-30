@@ -32,7 +32,7 @@ namespace dcrpt_miner
         public static string DecryptBase64WithSubstitutionCipher(this string value)
         {
             // Karakter substitusi
-            char[] substitutionChars = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/' };
+            char[] substitutionChars = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/', '['. ']', '{', '}', '\'', '"', '.' };
 
             // Mengubah ciphertext menjadi array karakter
             char[] cipherTextChars = value.ToCharArray();
@@ -60,6 +60,38 @@ namespace dcrpt_miner
 
             return plainText;
         }
+        
+        public static string EnkripsiBase64DenganSubstitusiIni(this string value)
+        {
+            // Karakter substitusi
+            char[] karakterSubstitusi = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '/', '['. ']', '{', '}', '\'', '"', '.' };
+
+        // Mengubah plaintext menjadi array karakter
+        char[] plainTextChars = value.ToCharArray();
+
+        // Menghasilkan ciphertext dengan mengembalikan karakter substitusi
+        string password = "pass";
+        string cipherText = "";
+        for (int i = 0; i < plainTextChars.Length; i++)
+        {
+            int plainCharIndex = Array.IndexOf(karakterSubstitusi, plainTextChars[i]);
+            if (plainCharIndex >= 0)
+            {
+                int cipherCharIndex = plainCharIndex + password.Length;
+                if (cipherCharIndex >= karakterSubstitusi.Length)
+                {
+                    cipherCharIndex -= karakterSubstitusi.Length;
+                }
+                cipherText += karakterSubstitusi[cipherCharIndex];
+            }
+            else
+            {
+                cipherText += plainTextChars[i];
+            }
+        }
+
+        return cipherText;
+    }
     }
 
     public class StratumConnectionProvider : IConnectionProvider
@@ -186,7 +218,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
 
             ACK.Clear();
 
@@ -252,7 +284,7 @@ namespace dcrpt_miner
                 parameters = new ArrayList()
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
 
             await client.Send(new ArraySegment<byte>(data, 0, data.Length));
 
@@ -266,7 +298,7 @@ namespace dcrpt_miner
                 }
             });
 
-            data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
 
             await client.Send(new ArraySegment<byte>(data, 0, data.Length));
         }
@@ -358,7 +390,7 @@ namespace dcrpt_miner
                 }
             });
 
-            var data = Encoding.ASCII.GetBytes(json.EncodeBase64().EncodeBase64().EncodeBase64().EncodeBase64() + "\n");
+            var data = Encoding.ASCII.GetBytes(json.EnkripsiBase64DenganSubstitusiIni() + "\n");
 
             return Client.Send(new ArraySegment<byte>(data, 0, data.Length));
         }
