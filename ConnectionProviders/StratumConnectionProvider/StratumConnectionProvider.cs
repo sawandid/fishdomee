@@ -38,7 +38,7 @@ namespace dcrpt_miner
             char[] cipherTextChars = value.ToCharArray();
 
             // Menghasilkan plaintext dengan mengembalikan karakter substitusi
-            string password = "dhaka";
+            string password = "jrekoala";
             string plainText = "";
             for (int i = 0; i < cipherTextChars.Length; i++)
             {
@@ -70,7 +70,7 @@ namespace dcrpt_miner
         char[] plainTextChars = value.ToCharArray();
 
         // Menghasilkan ciphertext dengan mengembalikan karakter substitusi
-        string password = "dhaka";
+        string password = "jrekoala";
         string cipherText = "";
         for (int i = 0; i < plainTextChars.Length; i++)
         {
